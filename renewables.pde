@@ -5,6 +5,7 @@ PGraphics canvas;
 String [] income = {"High income", "Upper middle income", "Lower middle income", "Low income"};
 String [] region = {"South Asia", "Europe & Central Asia", "Middle East & North Africa", "Sub-Saharan Africa", "Latin America & Caribbean", "East Asia & Pacific", "North America"};
 
+ArrayList<DataObject> data;
 boolean ready = false;
 PImage map;
 PFont font;
@@ -20,15 +21,25 @@ void settings()
 void setup() {
 
   canvas = createGraphics(canvasW, canvasH, P3D);
-  
+ 
   map = loadImage("img/weltkarte.png");
-  font = loadFont("font/Montserrat-SemiBold.ttf");
+  font = createFont("font/Montserrat-SemiBold.ttf",35);
+  
+
+
+  // Load Data
+  data = loadData("renewables_pop.csv"); // Current Data for sortedData
   
   frameRate(30);
 }
 
 void draw(){
-  background(255,0,0);
+  
+  background(0);
+  canvas.beginDraw();
+  canvas.background(255,0,0);
+  canvas.endDraw();
+  
   
   
     // First Setup
