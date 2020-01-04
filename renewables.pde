@@ -13,7 +13,7 @@ PFont font;
 
 // Scales
 OrdinalScale regionColorScale = new OrdinalScale(); // Region zu Farbe
-OrdinalScale yByIncome = new OrdinalScale(); // Income to Y
+OrdinalScale2 yByIncome = new OrdinalScale2(); // Income to Y
 LinearScale surfaceScale = new LinearScale(); // Surface to Radius
 LinearScale rankScale = new LinearScale(); // Value to Rank / X
 
@@ -46,20 +46,43 @@ void setup() {
 
 
   divider = (canvas.height - 150.0) / 4.0;
-  
+
   /********** Scale Setup **********/
 
   // Latin America & Caribbean | Sub-Saharan Africa | Middle East & North Africa | Europe & Central Asia | East Asia & Pacific | North America | South Asia
   regionColorScale.domain(region);
-  
-  regionColorScale.range(["29, 114, 137",   // South Asia
-            "195, 114, 206",  // Europe & Central Asia
-            "221, 81, 3",     // Middle East & North Africa
-            "242, 172, 41",   // Sub-Saharan Africa
-            "105, 186, 91",   // Latin America & Caribbean
-            "172, 235, 242",  // East Asia & Pacific
-            "46, 89, 2"]);    // North America
 
+  String [] colorStrings = {"29, 114, 137", // South Asia
+    "195, 114, 206", // Europe & Central Asia
+    "221, 81, 3", // Middle East & North Africa
+    "242, 172, 41", // Sub-Saharan Africa
+    "105, 186, 91", // Latin America & Caribbean
+    "172, 235, 242", // East Asia & Pacific
+    "46, 89, 2"};
+
+  regionColorScale.range(colorStrings);    // North America
+
+  // Fix it
+  yByIncome.domain(income);
+
+  float [] yrange = {(divider * 0) + (divider / 2), (divider * 1) + (divider / 2), (divider * 2) + (divider / 2), (divider * 3) + (divider / 2)};
+  yByIncome.range(yrange);
+  //    .range([(100) + (divider * 0) + (divider / 2), (100) +  (divider * 3) + (divider / 2), (100) +  (divider * 2) + (divider / 2), (100) +  (divider * 1) + (divider / 2)])
+
+  float minSize = Float.MAX_VALUE;
+  for(DataObject d : data){
+    if(d.Surface < minSize){
+      minSize = d.Surface;
+    }
+  }
+  
+  float maxSize = Float.MIN_VALUE;
+  for(DataObject d : data){
+    if(d.Surface > maxSize){
+      maxSize = d.Surface;
+    }
+  }
+  
 }
 
 void draw() {
