@@ -1,4 +1,5 @@
 import java.util.Comparator;
+import java.lang.reflect.Field;
 
 int canvasW = 7680;
 int canvasH = 1080;
@@ -118,8 +119,10 @@ void setup() {
   nextYearReference = "E1991";
   //nextSortedData = sortArray(futureData, nextYearReference);
   
-  data.sort(Comparator.comparing(DataObject::Surface));
-
+  //probably make a static variable Reference in DataObject
+ // data.sort(Comparator.comparing(DataObject::Surface));
+   // Field[] fields = DataObject.class.getDeclaredFields();
+   // println("fields.length:  "  + fields.length);
 }
 
 void draw() {

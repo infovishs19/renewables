@@ -61,6 +61,8 @@ class DataObject {
   float P2014;
   float P2015;
 
+  HashMap<String, Float> lookup = new HashMap<String, Float>();
+
   DataObject(String CountryName, 
     float Lat, 
     float Lon, 
@@ -131,8 +133,11 @@ class DataObject {
     this.Region=Region;
     this.IncomeGroup=IncomeGroup;
     this.E1990=E1990;
+    // lookup.put("E1990",E1990);
     this.E1991=E1991;
+    // lookup.put("E1991",E1991);
     this.E1992=E1992;
+    //  lookup.put("E1991",E1991);
     this.E1993=E1993;
     this.E1994=E1994;
     this.E1995=E1995;
@@ -183,6 +188,25 @@ class DataObject {
     this.P2013=P2013;
     this.P2014=P2014;
     this.P2015=P2015;
-  }
 
+
+    //make a lookup for all years
+    Field[] fields = DataObject.class.getDeclaredFields();
+    println("fields.length:  "  + fields.length);
+    for (int i=0; i<fields.length; i++) {
+      Field f = fields[i];
+      String name = f.getName();
+      println("field name: " + name);
+      if (name.startsWith("E")) {
+        try {
+          float value = f.getFloat(this);
+          println("value: " + value);
+          lookup.put(name, value);
+        }
+        catch(IllegalAccessException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+  }
 }
