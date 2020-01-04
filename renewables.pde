@@ -44,7 +44,7 @@ int [] comparedIndex;
 // Processing Standard Functions
 void settings() 
 {
-  size(canvasW/3, canvasH/3, P3D);
+  size(canvasW/2, canvasH/2, P3D);
   PJOGL.profile=1;
 }
 

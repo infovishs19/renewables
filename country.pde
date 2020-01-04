@@ -23,7 +23,7 @@ class Country { // Klare Namenswahl hilft
     // Getting Data
     this.countryData = countryData;
     this.code = this.countryData.Code;
-    this.value = this.countryData.getValue(myYear); //TODO round to one after decimal
+    this.value = this.countryData.getValue(myYear); //TODO round to two after decimal
 
     // Choosing Color
     this.incomeGroup = this.countryData.IncomeGroup;
@@ -33,7 +33,7 @@ class Country { // Klare Namenswahl hilft
     this.green = Float.parseFloat(this.regionColors[1]);
     this.blue = Float.parseFloat(this.regionColors[2]);
     
-   // println("color of " + this.code + ": " + this.red + "," + this.green + "," + this.blue );
+    //println("color of " + this.code + ": " + this.red + "," + this.green + "," + this.blue );
 
 
     // Ranking
@@ -53,7 +53,7 @@ class Country { // Klare Namenswahl hilft
     
    
     if(this.code.equals("IRL")){
-   // println("moveCountry x: " + this.x + " , " + this.targetX + ", " + this.code);
+    //println("moveCountry x: " + this.x + " , " + this.targetX + ", " + this.code);
     }
     this.x = ease(this.x, this.targetX); // Move Target
   
