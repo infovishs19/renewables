@@ -128,12 +128,18 @@ void setup() {
   nextSortedData = sortArray(futureData, nextYearReference);
   
   compareSortedData(); // Fill Comparison Array
+  
+
+
+  ready = true;
 }
 
 void draw() {
 
   background(0);
   canvas.beginDraw();
+  canvas.textFont(font);
+  canvas.noStroke();
   canvas.background(255, 0, 0);
   canvas.endDraw();
 
