@@ -140,25 +140,25 @@ void draw() {
   canvas.beginDraw();
   canvas.textFont(font);
   canvas.noStroke();
-  canvas.background(255, 0, 0);
-  canvas.endDraw();
+
+
 
 
   // First Setup
   if (frameCount < 10) {
     if (!ready) {
-      background(0);
+      canvas.background(0);
       return;
     } else {
-      background(0);
+      canvas.background(0);
     }
-    // gridLine();
+    gridLine();
     //drawRanking(); // Call first Drawing
   }
 
   //reDraw();
 
-
+  canvas.endDraw();
   image(canvas, 0, 0, width, height);
 }
 
@@ -193,5 +193,67 @@ void compareSortedData(){
     }
     
     comparedIndex[i] = index;
+  }
+}
+
+
+void gridLine(){
+  //    rankScale
+  float gridValue = 15.0;
+  float cycles = floor(data.size() / gridValue);
+
+  for(int i = 0; i <= cycles + 1; i++){
+    float tempX = rankScale.map(gridValue * i - 1);
+    float tempYearX = rankScale.map((gridValue * i - 1) - 10);
+    String tempText = "Rang: " + (int)(gridValue * i);
+
+    canvas.stroke(255, 255, 255, 180);
+    canvas.strokeWeight(2);
+
+    if(i != 0 && i != cycles + 1){
+      //      line(tempX, 0, tempX, 80);
+      canvas.line(tempX, canvas.height - 80, tempX, canvas.height);
+
+      // SetUp Text
+      canvas.noStroke();
+      canvas.textSize(16);
+      canvas.textAlign(CENTER);
+      canvas.fill(255, 255, 255, 180);
+
+      //      text(tempText, tempX, 100);
+      canvas.text(tempText, tempX, canvas.height - 100);
+      println(tempText);
+      println(tempX);
+    }
+
+  }
+
+  // Add Height Information
+  for(int i = 0; i < income.length; i++ ){
+    canvas.pushMatrix();
+    canvas.noStroke();
+    canvas.textSize(20);
+    canvas.translate(canvas.width - 50, yByIncome.map(income[i]));
+    //angleMode(DEGREES);
+    canvas.rotate(radians(-90));
+    canvas.fill(255, 255, 255, 180);
+
+    switch(income[i]){
+      case "High income£":
+        canvas.text(income[i], 0, 0);
+        break;
+      case "Upper middle income":
+        canvas.text("Upper middle\nincome", 0, 0);
+        break;
+      case "Lower middle income":
+        canvas.text("Lower middle\nincome", 0, 0);
+        break;
+      case "Low income":
+        canvas.text(income[i], 0, 0);
+        break;
+      default:
+        break;
+    }
+    canvas.popMatrix();
   }
 }

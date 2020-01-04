@@ -60,6 +60,10 @@ class OrdinalScale2 {
       lookup.put(theKey,val);
     }
   }
+  
+  float map(String s){
+    return lookup.get(s);
+  }
 }
 
 class LinearScale {
@@ -76,5 +80,9 @@ class LinearScale {
   
   void range(float [] ran){
     this.range = ran;
+  }
+  
+  float map(float n){
+    return PApplet.map(n,this.domain[0],this.domain[1],this.range[0],this.range[1]);
   }
 }
