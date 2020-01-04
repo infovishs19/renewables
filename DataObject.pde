@@ -212,8 +212,10 @@ class DataObject implements Comparable<DataObject> {
   }
   
   float getValue(String yearKey){
-    //println("yearKey of " + this.CountryName + " , " + yearKey);
-    return this.lookup.get(yearKey);
+    
+    float result =  this.lookup.get(yearKey);
+    //println("yearKey of " + this.CountryName + " , " + yearKey + " value: " + result);
+    return result;
   }
   
   String toString(){

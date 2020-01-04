@@ -155,7 +155,7 @@ void draw() {
     drawRanking(); // Call first Drawing
   }
 
-  //reDraw();
+  reDraw();
 
   canvas.endDraw();
   image(canvas, 0, 0, width, height);
@@ -300,4 +300,79 @@ void reDraw(){
   canvas.text("Erneuerbare Energie", 80, 100);
   canvas.textSize(25);
   canvas.text("Eine Rangliste der Energieanteile", 80, 135);
+}
+
+
+// Update on Click
+void mouseClicked() {
+  println("mouseClicked");
+  updateYear();
+  updateData();
+}
+
+
+/******************** Update Rank Data usw. ********************/
+void updateData(){
+
+  println("updateData");
+  for(int i = 0; i < data.size(); i++){
+    Country myObject = countryByRank[i];
+    String currentCode = sortedData.get(i).Code;
+
+    myObject.currentRanking = myObject.nextRank;
+
+    for(int j = 0; j < data.size(); j++){
+      if(myObject.code == nextSortedData.get(j).Code){
+        myObject.nextRank = j;
+        myObject.targetX = rankScale.map(myObject.currentRanking);
+      }
+    }
+  }
+
+}
+
+
+// Change Value to new Year until == 2015
+void updateYear(){
+  
+  println("updateYear");
+  if(currentYear < 2014){
+    // Change current Nr.
+    currentYear++; // Add 1 to current Year
+    currentYearReference = "E" + (int)currentYear;
+
+    // Change Future Nr.
+    nextYear++;
+    nextYearReference  = "E" + (int)nextYear;
+
+    // Update Sorted Array
+    updateArrays(currentYearReference, nextYearReference);
+  }else if(currentYear == 2014){
+    // Change current Nr.
+    currentYear++; // Add 1 to current Year
+    currentYearReference = "E" + (int)currentYear;
+
+    // Change Future Nr.
+    nextYear = 1990;
+    nextYearReference  = "E" + (int)nextYear;
+
+    // Update Sorted Array
+    updateArrays(currentYearReference, nextYearReference);   
+  }else if(currentYear == 2015){
+    currentYear = 1990; // Add 1 to current Year
+    currentYearReference = "E" + (int)currentYear;
+
+    // Change Future Nr.
+    nextYear++;
+    nextYearReference  = "E" + (int)nextYear;
+
+    // Update Sorted Array
+    updateArrays(currentYearReference, nextYearReference);
+  }
+}
+
+// Update Array Sorting to new Year
+void updateArrays(String ny, String nyr) {    
+  sortedData = sortArray(data, ny);
+  nextSortedData = sortArray(futureData, nyr);
 }
