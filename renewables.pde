@@ -31,46 +31,59 @@ void settings()
 
 void setup() {
 
-  
+
   frameRate(30);
   canvas = createGraphics(canvasW, canvasH, P3D);
- 
+
   map = loadImage("img/weltkarte.png");
-  font = createFont("font/Montserrat-SemiBold.ttf",35);
-  
+  font = createFont("font/Montserrat-SemiBold.ttf", 35);
+
 
 
   // Load Data
   data = loadData("renewables_pop.csv"); // Current Data for sortedData
   futureData = loadData("renewables_pop.csv");// Current Data for nextSortedData
+
+
+  divider = (canvas.height - 150.0) / 4.0;
   
+  /********** Scale Setup **********/
+
+  // Latin America & Caribbean | Sub-Saharan Africa | Middle East & North Africa | Europe & Central Asia | East Asia & Pacific | North America | South Asia
+  regionColorScale.domain(region);
   
-    divider = (canvas.height - 150.0) / 4.0;
-    
+  regionColorScale.range(["29, 114, 137",   // South Asia
+            "195, 114, 206",  // Europe & Central Asia
+            "221, 81, 3",     // Middle East & North Africa
+            "242, 172, 41",   // Sub-Saharan Africa
+            "105, 186, 91",   // Latin America & Caribbean
+            "172, 235, 242",  // East Asia & Pacific
+            "46, 89, 2"]);    // North America
+
 }
 
-void draw(){
-  
+void draw() {
+
   background(0);
   canvas.beginDraw();
-  canvas.background(255,0,0);
+  canvas.background(255, 0, 0);
   canvas.endDraw();
-  
-  
-    // First Setup
-  if(frameCount < 10){
+
+
+  // First Setup
+  if (frameCount < 10) {
     if (!ready) {
       background(0);
       return;
     } else {
       background(0);
     }
-   // gridLine();
+    // gridLine();
     //drawRanking(); // Call first Drawing
   }
 
   //reDraw();
-  
-  
-  image(canvas,0,0,width,height);
+
+
+  image(canvas, 0, 0, width, height);
 }
