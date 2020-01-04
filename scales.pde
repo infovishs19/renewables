@@ -63,6 +63,18 @@ class OrdinalScale2 {
 }
 
 class LinearScale {
+  
+  float [] domain;
+  float [] range;
+  
   LinearScale() {
+  }
+  
+  void domain(float [] dom){
+    this.domain = dom;
+  }
+  
+  void range(float [] ran){
+    this.range = ran;
   }
 }

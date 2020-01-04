@@ -70,19 +70,32 @@ void setup() {
   //    .range([(100) + (divider * 0) + (divider / 2), (100) +  (divider * 3) + (divider / 2), (100) +  (divider * 2) + (divider / 2), (100) +  (divider * 1) + (divider / 2)])
 
   float minSize = Float.MAX_VALUE;
-  for(DataObject d : data){
-    if(d.Surface < minSize){
+  for (DataObject d : data) {
+    if (d.Surface < minSize) {
       minSize = d.Surface;
     }
   }
-  
+
   float maxSize = Float.MIN_VALUE;
-  for(DataObject d : data){
-    if(d.Surface > maxSize){
+  for (DataObject d : data) {
+    if (d.Surface > maxSize) {
       maxSize = d.Surface;
     }
   }
-  
+
+  // Value Scale Radius
+  float [] dom = {minSize, maxSize};
+  surfaceScale.domain(dom);
+
+  float [] ran = {10, 50};
+  surfaceScale.range(ran);
+
+  // Ranking Scale    
+
+  float [] rankDom = {0, data.size()};
+  rankScale.domain(rankDom);
+  float [] rankRange = {40, width - 80};
+  rankScale.range(rankRange);
 }
 
 void draw() {
@@ -109,4 +122,10 @@ void draw() {
 
 
   image(canvas, 0, 0, width, height);
+}
+
+// Sort Arrays
+function sortArray(array, year) {
+  array.sort((a, b) => (a[year] < b[year]) ? 1 : ((b[year] < a[year]) ? -1 : 0)); 
+  return array;
 }
