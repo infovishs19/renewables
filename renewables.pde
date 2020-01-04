@@ -113,10 +113,8 @@ void setup() {
 
   float [] rankDom = {0, data.size()};
   rankScale.domain(rankDom);
-  float [] rankRange = {40, width - 80};
+  float [] rankRange = {40, canvas.width - 80};
   rankScale.range(rankRange);
-
-
 
   // Class Setup
   currentYear = 1990;
@@ -134,8 +132,6 @@ void setup() {
   
   compareSortedData(); // Fill Comparison Array
   
-
-
   ready = true;
 }
 
@@ -267,7 +263,7 @@ void drawRanking(){
   countryByRank = new Country[data.size()];
   
   for (int i = 0; i < data.size(); i++) {
-    countryByRank[i] = new Country(sortedData[i], i, currentYearReference);
+    countryByRank[i] = new Country(sortedData.get(i), i, currentYearReference);
     countryByRank[i].display();
 
   } // End Data for()
