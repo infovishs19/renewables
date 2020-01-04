@@ -44,7 +44,7 @@ int [] comparedIndex;
 // Processing Standard Functions
 void settings() 
 {
-  size(canvasW/1, canvasH/1, P3D);
+  size(canvasW/3, canvasH/3, P3D);
   PJOGL.profile=1;
 }
 
@@ -118,7 +118,7 @@ void setup() {
 
   // Class Setup
   currentYear = 1990;
-  currentYearReference = "E1991";
+  currentYearReference = "E1990";
   sortedData = sortArray(data, currentYearReference);
 
   //get the first element

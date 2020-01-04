@@ -23,7 +23,7 @@ class Country { // Klare Namenswahl hilft
     // Getting Data
     this.countryData = countryData;
     this.code = this.countryData.Code;
-    this.value = this.countryData.getValue(myYear); //TODO round to two after decimal
+    this.value = this.countryData.getValue(myYear); //TODO round to one after decimal
 
     // Choosing Color
     this.incomeGroup = this.countryData.IncomeGroup;
@@ -79,7 +79,7 @@ class Country { // Klare Namenswahl hilft
     canvas.textSize(12);
     canvas.textAlign(CENTER);
     // text(this.currentRanking + 1, this.x, this.y + 60);
-    canvas.text(this.value + '%', this.x, this.y + 60);
+    canvas.text(nf(this.value,0,1) + '%', this.x, this.y + 60);
     canvas.text(this.code, this.x, this.y + 75);    
 
   }
