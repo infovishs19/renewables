@@ -275,3 +275,29 @@ float  ease(float n, float target) {
   float d = target - n;
   return n + d * easing;
 }
+
+
+
+/******************** reDraw / animate all Objects ********************/
+void reDraw(){
+  canvas.background(0);
+  canvas.imageMode(CENTER);
+  //image(map, 280, 300, 400, 400);
+   canvas.image(map, 280, 180, 400, 400);
+  gridLine();
+
+  for(int i = 0; i < sortedData.size(); i++){
+    countryByRank[i].moveCountry();  
+    countryByRank[i].display();
+  }
+  canvas.textAlign(LEFT);
+  canvas.noStroke();
+  canvas.fill(255, 255, 255, 180);
+  canvas.textSize(35);
+  // 7105.114285714286
+  float yearX = (canvas.width - 7105) / 2;
+  canvas.text(currentYear, canvas.width - yearX, canvas.height - 40);
+  canvas.text("Erneuerbare Energie", 80, 100);
+  canvas.textSize(25);
+  canvas.text("Eine Rangliste der Energieanteile", 80, 135);
+}
