@@ -6,9 +6,20 @@ String [] income = {"High income", "Upper middle income", "Lower middle income",
 String [] region = {"South Asia", "Europe & Central Asia", "Middle East & North Africa", "Sub-Saharan Africa", "Latin America & Caribbean", "East Asia & Pacific", "North America"};
 
 ArrayList<DataObject> data;
+ArrayList<DataObject> futureData;
 boolean ready = false;
 PImage map;
 PFont font;
+
+// Scales
+OrdinalScale regionColorScale = new OrdinalScale(); // Region zu Farbe
+OrdinalScale yByIncome = new OrdinalScale(); // Income to Y
+LinearScale surfaceScale = new LinearScale(); // Surface to Radius
+LinearScale rankScale = new LinearScale(); // Value to Rank / X
+
+// Design Variables
+float divider;
+float quarter;
 
 
 // Processing Standard Functions
@@ -20,6 +31,8 @@ void settings()
 
 void setup() {
 
+  
+  frameRate(30);
   canvas = createGraphics(canvasW, canvasH, P3D);
  
   map = loadImage("img/weltkarte.png");
@@ -29,8 +42,11 @@ void setup() {
 
   // Load Data
   data = loadData("renewables_pop.csv"); // Current Data for sortedData
+  futureData = loadData("renewables_pop.csv");// Current Data for nextSortedData
   
-  frameRate(30);
+  
+    divider = (canvas.height - 150.0) / 4.0;
+    
 }
 
 void draw(){
@@ -39,7 +55,6 @@ void draw(){
   canvas.beginDraw();
   canvas.background(255,0,0);
   canvas.endDraw();
-  
   
   
     // First Setup
