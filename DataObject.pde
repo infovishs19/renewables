@@ -1,4 +1,4 @@
-class DataObject {
+class DataObject implements Comparable<DataObject> {
 
   String CountryName;
   float Lat;
@@ -208,5 +208,25 @@ class DataObject {
         }
       }
     }
+    
+  }
+  
+  float getValue(String yearKey){
+    //println("yearKey of " + this.CountryName + " , " + yearKey);
+    return this.lookup.get(yearKey);
+  }
+  
+  String toString(){
+    return this.CountryName + ", " + this.getValue(currentYearReference);
+  } 
+  
+  @Override     
+  public int compareTo(DataObject other) {          
+    if(this.getValue(currentYearReference) < other.getValue(currentYearReference)){
+      return 1;
+    }else if(other.getValue(currentYearReference) < this.getValue(currentYearReference)){
+      return -1;
+    }
+    else return 0;
   }
 }

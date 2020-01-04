@@ -1,4 +1,4 @@
-import java.util.Comparator;
+import java.util.*;
 import java.lang.reflect.Field;
 
 int canvasW = 7680;
@@ -27,10 +27,11 @@ float quarter;
 float currentYear; // Raw Year Number
 String currentYearReference; // Reference to Energy Number
 float nextYear; // Raw next Year Number
-String nextYearReference; // Reference to Energy Number
+public static String nextYearReference; // Reference to Energy Number
 
 ArrayList<DataObject> sortedData;
 ArrayList<DataObject> nextSortedData;
+
 
 
 // Processing Standard Functions
@@ -107,22 +108,22 @@ void setup() {
   rankScale.domain(rankDom);
   float [] rankRange = {40, width - 80};
   rankScale.range(rankRange);
-  
-  
+
+
 
   // Class Setup
   currentYear = 1990;
-  currentYearReference = "E1990";
-  //sortedData = sortArray(data, currentYearReference);
+  currentYearReference = "E1991";
+  sortedData = sortArray(data, currentYearReference);
+
+  //get the first element
+  //for(int i=0; i<20; i++){
+  //  println(i +") " + sortedData.get(i));
+  //}
 
   nextYear = 1991;
   nextYearReference = "E1991";
   //nextSortedData = sortArray(futureData, nextYearReference);
-  
-  //probably make a static variable Reference in DataObject
- // data.sort(Comparator.comparing(DataObject::Surface));
-   // Field[] fields = DataObject.class.getDeclaredFields();
-   // println("fields.length:  "  + fields.length);
 }
 
 void draw() {
@@ -152,7 +153,11 @@ void draw() {
 }
 
 // Sort Arrays
-/*function sortArray(array, year) {
-  array.sort((a, b) => (a[year] < b[year]) ? 1 : ((b[year] < a[year]) ? -1 : 0)); 
-  return array;
-}*/
+ArrayList<DataObject> sortArray(ArrayList<DataObject> arr, String year) {
+  
+  ArrayList<DataObject> newList = new ArrayList<DataObject>(arr);
+  
+  Collections.sort(newList);
+
+  return newList;
+}
