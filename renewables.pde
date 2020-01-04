@@ -44,7 +44,7 @@ int [] comparedIndex;
 // Processing Standard Functions
 void settings() 
 {
-  size(canvasW/2, canvasH/2, P3D);
+  size(canvasW/1, canvasH/1, P3D);
   PJOGL.profile=1;
 }
 
@@ -166,6 +166,12 @@ ArrayList<DataObject> sortArray(ArrayList<DataObject> arr, String year) {
   
   ArrayList<DataObject> newList = new ArrayList<DataObject>(arr);
   
+  //give the year reference to all the data in newList
+  //and then use the year reference in comparable
+  for(DataObject d : newList){
+    d.yearRef = year;
+  }
+  
   Collections.sort(newList);
 
   return newList;
@@ -221,8 +227,8 @@ void gridLine(){
 
       //      text(tempText, tempX, 100);
       canvas.text(tempText, tempX, canvas.height - 100);
-      println(tempText);
-      println(tempX);
+     // println(tempText);
+     // println(tempX);
     }
 
   }
@@ -280,6 +286,8 @@ float  ease(float n, float target) {
 
 /******************** reDraw / animate all Objects ********************/
 void reDraw(){
+  
+  //println("redraw  " + frameCount);
   canvas.background(0);
   canvas.imageMode(CENTER);
   //image(map, 280, 300, 400, 400);
@@ -317,12 +325,13 @@ void updateData(){
   println("updateData");
   for(int i = 0; i < data.size(); i++){
     Country myObject = countryByRank[i];
+    println(i + ") " + myObject.code);
     String currentCode = sortedData.get(i).Code;
 
     myObject.currentRanking = myObject.nextRank;
 
     for(int j = 0; j < data.size(); j++){
-      if(myObject.code == nextSortedData.get(j).Code){
+      if(myObject.code.equals(nextSortedData.get(j).Code)){
         myObject.nextRank = j;
         myObject.targetX = rankScale.map(myObject.currentRanking);
       }
@@ -369,10 +378,24 @@ void updateYear(){
     // Update Sorted Array
     updateArrays(currentYearReference, nextYearReference);
   }
+  
+  println("currentYear " + currentYear);
 }
 
 // Update Array Sorting to new Year
 void updateArrays(String ny, String nyr) {    
   sortedData = sortArray(data, ny);
   nextSortedData = sortArray(futureData, nyr);
+  //println("sortedData: ");
+  //printHead(sortedData,10);
+  //println("nextSortedData: ");
+  //printHead(nextSortedData,10);
+}
+
+
+void printHead(ArrayList<DataObject> arr,int n){
+  for(int i=0; i<n; i++){
+    DataObject d = arr.get(i);
+    println(i + ") " + d.CountryName);
+  }
 }

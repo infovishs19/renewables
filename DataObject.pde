@@ -60,6 +60,9 @@ class DataObject implements Comparable<DataObject> {
   float P2013;
   float P2014;
   float P2015;
+  
+  //used for comparing
+  String yearRef = "";
 
   HashMap<String, Float> lookup = new HashMap<String, Float>();
 
@@ -224,9 +227,9 @@ class DataObject implements Comparable<DataObject> {
   
   @Override     
   public int compareTo(DataObject other) {          
-    if(this.getValue(currentYearReference) < other.getValue(currentYearReference)){
+    if(this.getValue(this.yearRef) < other.getValue(this.yearRef)){
       return 1;
-    }else if(other.getValue(currentYearReference) < this.getValue(currentYearReference)){
+    }else if(other.getValue(this.yearRef) < this.getValue(this.yearRef)){
       return -1;
     }
     else return 0;

@@ -33,7 +33,7 @@ class Country { // Klare Namenswahl hilft
     this.green = Float.parseFloat(this.regionColors[1]);
     this.blue = Float.parseFloat(this.regionColors[2]);
     
-    println("color of " + this.code + ": " + this.red + "," + this.green + "," + this.blue );
+   // println("color of " + this.code + ": " + this.red + "," + this.green + "," + this.blue );
 
 
     // Ranking
@@ -50,8 +50,13 @@ class Country { // Klare Namenswahl hilft
 
   /******************** ANIMATE RANKING ********************/
   void moveCountry(){
+    
+   
+    if(this.code.equals("IRL")){
+   // println("moveCountry x: " + this.x + " , " + this.targetX + ", " + this.code);
+    }
     this.x = ease(this.x, this.targetX); // Move Target
-
+  
   }
 
   /******************** DISPLAY OBJECTS ********************/
