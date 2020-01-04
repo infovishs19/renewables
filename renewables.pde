@@ -32,6 +32,8 @@ public static String nextYearReference; // Reference to Energy Number
 ArrayList<DataObject> sortedData;
 ArrayList<DataObject> nextSortedData;
 
+int [] comparedIndex;
+
 
 
 // Processing Standard Functions
@@ -123,7 +125,9 @@ void setup() {
 
   nextYear = 1991;
   nextYearReference = "E1991";
-  //nextSortedData = sortArray(futureData, nextYearReference);
+  nextSortedData = sortArray(futureData, nextYearReference);
+  
+  compareSortedData(); // Fill Comparison Array
 }
 
 void draw() {
@@ -160,4 +164,28 @@ ArrayList<DataObject> sortArray(ArrayList<DataObject> arr, String year) {
   Collections.sort(newList);
 
   return newList;
+}
+
+void compareSortedData(){
+ 
+  comparedIndex = new int[sortedData.size()];
+  
+  for(int i = 0; i < sortedData.size(); i++){
+    
+    int index = -1;
+    String code = sortedData.get(i).Code;
+    boolean found = false;
+    for(int j=0; j<nextSortedData.size() && !found; j++){
+      DataObject d = nextSortedData.get(j);
+      if(d.Code.equals(code)){
+        found = true;
+        index = j;
+      }
+    }
+    if(!found){
+      println("Error in compareSortedData");
+    }
+    
+    comparedIndex[i] = index;
+  }
 }
