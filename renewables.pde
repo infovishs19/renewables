@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 int canvasW = 7680;
 int canvasH = 1080;
 PGraphics canvas;
@@ -20,6 +22,14 @@ LinearScale rankScale = new LinearScale(); // Value to Rank / X
 // Design Variables
 float divider;
 float quarter;
+
+float currentYear; // Raw Year Number
+String currentYearReference; // Reference to Energy Number
+float nextYear; // Raw next Year Number
+String nextYearReference; // Reference to Energy Number
+
+ArrayList<DataObject> sortedData;
+ArrayList<DataObject> nextSortedData;
 
 
 // Processing Standard Functions
@@ -96,6 +106,20 @@ void setup() {
   rankScale.domain(rankDom);
   float [] rankRange = {40, width - 80};
   rankScale.range(rankRange);
+  
+  
+
+  // Class Setup
+  currentYear = 1990;
+  currentYearReference = "E1990";
+  //sortedData = sortArray(data, currentYearReference);
+
+  nextYear = 1991;
+  nextYearReference = "E1991";
+  //nextSortedData = sortArray(futureData, nextYearReference);
+  
+  data.sort(Comparator.comparing(DataObject::Surface));
+
 }
 
 void draw() {
@@ -125,7 +149,7 @@ void draw() {
 }
 
 // Sort Arrays
-function sortArray(array, year) {
+/*function sortArray(array, year) {
   array.sort((a, b) => (a[year] < b[year]) ? 1 : ((b[year] < a[year]) ? -1 : 0)); 
   return array;
-}
+}*/
