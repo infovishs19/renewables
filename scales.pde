@@ -28,6 +28,10 @@ class OrdinalScale {
       lookup.put(theKey,val);
     }
   }
+  
+  String map(String s){
+    return lookup.get(s);
+  }
 }
 
 class OrdinalScale2 {

@@ -8,6 +8,11 @@ PGraphics canvas;
 String [] income = {"High income", "Upper middle income", "Lower middle income", "Low income"};
 String [] region = {"South Asia", "Europe & Central Asia", "Middle East & North Africa", "Sub-Saharan Africa", "Latin America & Caribbean", "East Asia & Pacific", "North America"};
 
+
+// Class Specific Var
+Country [] countryByRank; // Class Placeholder
+
+
 ArrayList<DataObject> data;
 ArrayList<DataObject> futureData;
 boolean ready = false;
@@ -142,8 +147,6 @@ void draw() {
   canvas.noStroke();
 
 
-
-
   // First Setup
   if (frameCount < 10) {
     if (!ready) {
@@ -153,7 +156,7 @@ void draw() {
       canvas.background(0);
     }
     gridLine();
-    //drawRanking(); // Call first Drawing
+    drawRanking(); // Call first Drawing
   }
 
   //reDraw();
@@ -256,4 +259,23 @@ void gridLine(){
     }
     canvas.popMatrix();
   }
+}
+
+void drawRanking(){
+  canvas.background(0);
+
+  countryByRank = new Country[data.size()];
+  
+  for (int i = 0; i < data.size(); i++) {
+    countryByRank[i] = new Country(sortedData[i], i, currentYearReference);
+    countryByRank[i].display();
+
+  } // End Data for()
+}
+
+/* Easing Function */
+float  ease(float n, float target) {
+  float easing = 0.1;
+  float d = target - n;
+  return n + d * easing;
 }
